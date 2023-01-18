@@ -229,10 +229,10 @@ public class PwaTestIT extends ChromeDeviceTest {
     public void compareUncompressedAndCompressedServiceWorkerJS()
             throws IOException {
         open();
-        waitForServiceWorkerReadyAndPrintLogs("compareUncompressedAndCompressedServiceWorkerJS");
-
         // test only in production mode
         Assume.assumeTrue(isProductionMode());
+        waitForServiceWorkerReadyAndPrintLogs("compareUncompressedAndCompressedServiceWorkerJS");
+
 
         byte[] uncompressed = readBytesFromUrl(getRootURL() + "/sw.js");
         byte[] compressed = readBytesFromUrl(getRootURL() + "/sw.js.br");
