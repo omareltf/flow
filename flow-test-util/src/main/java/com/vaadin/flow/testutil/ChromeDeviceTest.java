@@ -182,13 +182,13 @@ public class ChromeDeviceTest extends ViewOrUITest {
         // Wait until service worker is ready
         Assert.assertTrue("Should have service worker registered",
                 (Boolean) ((JavascriptExecutor) getDriver()).executeAsyncScript(
-                        "const done = arguments[arguments.length - 1];"
+                         "const done = arguments[arguments.length - 1];"
                                 + "const timeout = new Promise("
-                                + "  resolve => setTimeout(resolve, 100000)"
+                                + "  resolve => setTimeout(() => { console.warn('=========== timeout'); resolve(); }, 10000)"
                                 + ");" + "Promise.race(["
                                 + "  navigator.serviceWorker.ready,"
                                 + "  timeout])"
-                                + ".then(result => done(!!result));"));
+                                + ".then(result => {console.warn('================== then ', result); done(!!result)});"));
     }
 
     /**
