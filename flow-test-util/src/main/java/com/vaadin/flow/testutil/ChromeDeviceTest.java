@@ -184,7 +184,7 @@ public class ChromeDeviceTest extends ViewOrUITest {
                 (Boolean) ((JavascriptExecutor) getDriver()).executeAsyncScript(
                          "const done = arguments[arguments.length - 1];"
                                 + "const timeout = new Promise("
-                                + "  resolve => setTimeout(() => { console.warn('=========== timeout'); resolve(); }, 10000)"
+                                + "  resolve => setTimeout(() => { console.warn('=========== timeout'); resolve(false); }, 10000)"
                                 + ");" + "Promise.race(["
                                 + "  navigator.serviceWorker.ready,"
                                 + "  timeout])"
