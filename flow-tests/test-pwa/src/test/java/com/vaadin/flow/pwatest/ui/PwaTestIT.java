@@ -159,7 +159,7 @@ public class PwaTestIT extends ChromeDeviceTest {
     @Test
     public void testPwaResourcesOffline() {
         open();
-        waitForServiceWorkerReadyAndPrintLogs();
+        waitForServiceWorkerReadyAndPrintLogs("testPwaResourcesOffline");
         getDevTools().setOfflineEnabled(true);
         try {
             // Ensure we are offline
@@ -179,7 +179,7 @@ public class PwaTestIT extends ChromeDeviceTest {
     @Test
     public void testPwaOfflinePath() {
         open();
-        waitForServiceWorkerReadyAndPrintLogs();
+        waitForServiceWorkerReadyAndPrintLogs("testPwaOfflinePath");
 
         // Confirm that app shell is loaded
         Assert.assertNotNull("Should have outlet when loaded online",
@@ -229,7 +229,7 @@ public class PwaTestIT extends ChromeDeviceTest {
     public void compareUncompressedAndCompressedServiceWorkerJS()
             throws IOException {
         open();
-        waitForServiceWorkerReadyAndPrintLogs();
+        waitForServiceWorkerReadyAndPrintLogs("compareUncompressedAndCompressedServiceWorkerJS");
 
         // test only in production mode
         Assume.assumeTrue(isProductionMode());
@@ -330,18 +330,19 @@ public class PwaTestIT extends ChromeDeviceTest {
         return result == null ? "" : result.toString();
     }
 
-    private void waitForServiceWorkerReadyAndPrintLogs() {
+    private void waitForServiceWorkerReadyAndPrintLogs(String prefix) {
+        printConsoleLogs(prefix + ".beforeWaitForSW");
         try {
             waitForServiceWorkerReady();
         } catch (ScriptTimeoutException | AssertionError e) {
-            printConsoleLogs();
+            printConsoleLogs(prefix + ".waitForServiceWorkerReady");
             throw e;
         }
     }
-    public void printConsoleLogs() {
+    public void printConsoleLogs(String prefix) {
         Logs logs = driver.manage().logs();
                 logs.get(System.getProperty("logType", LogType.BROWSER)).getAll()
                 .forEach(le -> System.out
-                        .println("================= " + le.getLevel() + " --> " + le.getMessage()));
+                        .println("================= " + prefix + " ::: " + le.getLevel() + " --> " + le.getMessage()));
     }
 }
