@@ -49,6 +49,7 @@ public class PwaTestIT extends ChromeDeviceTest {
 
     @Test
     public void testPwaResources() throws IOException {
+        System.out.println("############################################# testPwaResources");
         open();
 
         checkLogsForErrors(
@@ -158,6 +159,7 @@ public class PwaTestIT extends ChromeDeviceTest {
 
     @Test
     public void testPwaResourcesOffline() {
+        System.out.println("############################################# testPwaResourcesOffline");
         open();
         waitForServiceWorkerReadyAndPrintLogs("testPwaResourcesOffline");
         getDevTools().setOfflineEnabled(true);
@@ -178,6 +180,7 @@ public class PwaTestIT extends ChromeDeviceTest {
 
     @Test
     public void testPwaOfflinePath() {
+        System.out.println("############################################# testPwaOfflinePath");
         open();
         waitForServiceWorkerReadyAndPrintLogs("testPwaOfflinePath");
 
@@ -228,6 +231,7 @@ public class PwaTestIT extends ChromeDeviceTest {
     @Test
     public void compareUncompressedAndCompressedServiceWorkerJS()
             throws IOException {
+        System.out.println("############################################# compareUncompressedAndCompressedServiceWorkerJS");
         open();
         // test only in production mode
         Assume.assumeTrue(isProductionMode());
