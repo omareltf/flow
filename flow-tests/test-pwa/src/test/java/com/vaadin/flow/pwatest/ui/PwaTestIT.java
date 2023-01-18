@@ -35,6 +35,7 @@ import org.junit.Assume;
 import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.ScriptTimeoutException;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.Logs;
@@ -332,7 +333,7 @@ public class PwaTestIT extends ChromeDeviceTest {
     private void waitForServiceWorkerReadyAndPrintLogs() {
         try {
             waitForServiceWorkerReady();
-        } catch (AssertionError e) {
+        } catch (ScriptTimeoutException | AssertionError e) {
             printConsoleLogs();
             throw e;
         }
