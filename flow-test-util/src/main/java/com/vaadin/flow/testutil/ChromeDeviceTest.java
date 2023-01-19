@@ -125,11 +125,13 @@ public class ChromeDeviceTest extends ViewOrUITest {
         chromeOptions.setCapability("networkConnectionEnabled", true);
 
         if (getDeploymentHostname().equals("localhost")) {
+            System.out.println("=============================== customizeChromeOptions for localhost");
             // Use headless Chrome for running locally
             if (!isJavaInDebugMode()) {
                 chromeOptions.addArguments("--headless", "--disable-gpu");
             }
         } else {
+            System.out.println("=============================== customizeChromeOptions for remote connection");
             // Enable service workers over http remote connection
             chromeOptions.addArguments(String.format(
                     "--unsafely-treat-insecure-origin-as-secure=%s",
@@ -142,7 +144,7 @@ public class ChromeDeviceTest extends ViewOrUITest {
             // https://stackoverflow.com/questions/50642308/webdriverexception-unknown-error-devtoolsactiveport-file-doesnt-exist-while-t
             chromeOptions.addArguments("--disable-dev-shm-usage");
         }
-
+        System.out.println("=============================== customizeChromeOptions " + chromeOptions.asMap());
         return chromeOptions;
     }
 
